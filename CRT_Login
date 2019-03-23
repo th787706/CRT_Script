@@ -1,0 +1,32 @@
+# $language = "VBScript"
+# $interface = "1.0"
+
+' Connect to a telnet server and automate the initial login sequence.
+' Note that synchronous mode is enabled to prevent server output from
+' potentially being missed.
+Sub Main
+  
+  crt.Screen.Synchronous = True
+  ' connect to host on port 23 (the default telnet port)
+  '
+  ' crt.Session.Connect "/TELNET login.myhost.com 23"
+  crt.Screen.WaitForString "login:"
+  crt.Screen.Send "userID" & vbCr
+  crt.Screen.WaitForString "password:"
+  crt.Screen.Send "password" & vbCr
+  crt.Screen.Synchronous = False
+  
+End Sub
+  
+  
+  
+  ---------------------------------------------------------------------------
+  
+  Command 종류 (vbs 기준)
+-      Dim variable_name : 변수선언
+-      crt.Dialog.Prompt (“”, “”) : Prompt 창 호출
+-      crt.Screen.Send “string” : 문자열 전송
+-      crt.Screen.WaitForString “pattern” : “pattern” 의 입력을 대기한다.
+-      crt.Session.LogFileName = “file_path + file_name” : 로깅시 사용할 경로 및 파일이름
+-      crt.Session.Log True : 로깅시작
+
